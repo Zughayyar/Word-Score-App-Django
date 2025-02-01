@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Score App</title>
+
+    {% load static %}     
+    <link rel="stylesheet" href="{% static 'css/styles/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Word Score Checker</h1>
+
+        <form id="word-score-form">
+            <input type="text" name="page_url" id="page_url" placeholder="Enter URL" required>
+            <input type="text" name="word" id="word" placeholder="Enter Word" required>
+            <button type="submit">Check</button>
+        </form>
+    
+        <div class="result-box" id="result-box">
+            <p id="status">Processing...</p>
+            <p id="total-occurrences"></p>
+            <p id="all-pages"></p>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Results:</h2>
+        {% if total_occurrences is not None %}
+        <div class="result-box">
+            <p><strong>Total Occurrences:</strong> {{ total_occurrences }}</p>
+            <p><strong>Pages Visited:</strong></p>
+            <ul>
+                {% for page in all_pages %}
+                    <li>{{ page }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

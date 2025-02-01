@@ -1,0 +1,11 @@
+[project]
+name = "word-score-app-django"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "celery>=5.4.0",
+    "django>=5.1.5",
+    "redis>=5.2.1",
+]

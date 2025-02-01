@@ -1,0 +1,49 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+
+#General
+.idea/
+
+#Django
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment (if not using uv globally)
+venv/
+.env/
+
+# Django-specific files
+db.sqlite3
+*.log
+local_settings.py
+media/
+staticfiles/
+
+# Pytest and coverage reports
+.coverage
+htmlcov/
+*.cover
+.cache
+nosetests.xml
+coverage.xml
+
+# MyPy
+.mypy_cache/
+
+# UV files
+uv.lock
+
+# MacOS and system files
+.DS_Store
+Thumbs.db
