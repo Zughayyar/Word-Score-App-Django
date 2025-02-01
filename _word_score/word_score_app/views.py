@@ -1,28 +1,38 @@
 from django.shortcuts import render, redirect
 from celery.result import AsyncResult
-from .tasks import process_word_score
-import json
+from .tasks import word_score_task
 from django.http import JsonResponse
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+import logging
+
+logger = logging.getLogger(__name__)
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'csrf_token': request.COOKIES['csrftoken']})
 
-def word_score(request):
-    if request.method == 'POST':
-        page_url = request.POST['page_url']
-        word = request.POST['word']
+@csrf_exempt
+def word_score_view(request):
+    if request.method == "POST":
+        page_url = request.POST.get("page_url")
+        word = request.POST.get("word")
+        
+        if not page_url or not word:
+            return JsonResponse({"error": "Missing parameters"}, status=400)
+        
+        try:
+            task = word_score_task.delay(page_url, word)
+            return JsonResponse({"task_id": task.id})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    return JsonResponse({"error": "Invalid request method"}, status=405)
 
-        # Start Celery Task
-        task = process_word_score.delay(page_url, word)
-
-        # Return Task ID to the frontend
-        return JsonResponse({'task_id': task.id})
-    
-def task_status(request, task_id):
-    result = AsyncResult(task_id)
-    if result.state == 'SUCCESS':
-        return JsonResponse(result.result)  # Return the result
-    elif result.state == 'FAILURE':
-        return JsonResponse({'status': 'error', 'message': str(result.result)})
+def task_status_view(request, task_id):
+    task_result = AsyncResult(task_id)
+    if task_result.state == 'PENDING':
+        response = {"status": "pending"}
+    elif task_result.state == 'SUCCESS':
+        response = task_result.result
     else:
-        return JsonResponse({'status': 'pending'})
+        response = {"status": "error", "message": str(task_result.info)}
+    return JsonResponse(response)

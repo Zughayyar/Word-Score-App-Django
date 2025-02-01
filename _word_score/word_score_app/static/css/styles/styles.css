@@ -3,11 +3,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    gap: 20px;
-    height: 80vh;
+    min-height: 100vh; /* Ensure full viewport height */
     background-color: #f4f4f4;
+    margin: 0; /* Remove default body margin */
 }
+
 .container {
     background: white;
     padding: 20px;
@@ -16,13 +16,16 @@ body {
     width: 400px;
     text-align: center;
 }
+
 input {
     width: 95%;
     padding: 8px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
+
 button {
     width: 100%;
     padding: 10px;
@@ -32,14 +35,25 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #218838;
 }
+
 .result-box {
     margin-top: 15px;
     padding: 10px;
     background: #d4edda;
     color: #155724;
     border-radius: 4px;
-    display: none;
+    display: none; /* Initially hidden, shown by JavaScript */
+}
+
+.result-box ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+}
+
+.result-box li {
+    margin-bottom: 5px;
 }
