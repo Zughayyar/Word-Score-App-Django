@@ -46,11 +46,14 @@ function checkTaskStatus(taskId) {
                     $("#status").text("Completed!");
                     $("#total-occurrences").text("Total Occurrences: " + response.total_occurrences);
 
-                    const pagesList = $("<ul></ul>");
-                    response.all_pages.forEach(page => {
-                        pagesList.append("<li>" + page + "</li>");
-                    });
-                    $("#all-pages").html("Pages Visited: ").append(pagesList);
+                    // const pagesList = $("<ul></ul>");
+                    // response.all_pages.forEach(page => {
+                    //     pagesList.append("<li>" + page + "</li>");
+                    // });
+                    // $("#all-pages").html("Pages Visited: ").append(pagesList);
+
+                    const pagesCount = response.all_pages.length;
+                    $("#all-pages").html("Pages Visited: " + pagesCount);
 
                 } else if (response.status === 'error') {
                     clearInterval(intervalId);
