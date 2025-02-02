@@ -162,7 +162,7 @@ def download_page(url: str) -> Page:
     retries = 3
     for attempt in range(retries):
         try:
-            response = requests.get(url, timeout=10, headers=headers, verify=False)
+            response = requests.get(url, timeout=10, headers=headers, verify=True)
             if response.status_code == 200:
                 return Page(content=response.text, url=url)
             else:
