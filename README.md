@@ -17,7 +17,7 @@ Here's a screenshot of the app:
 ## Requirements
 
 - [uv](https://docs.astral.sh/uv): A tool used to manage the environment for this project.
-- [redis](https://redis.io/): An open source, in-memory, NoSQL key/value store
+- [redis](https://redis.io/): An open source, in-memory, NoSQL key/value store.
 
 ## 🚀 Setup & Installation
 
