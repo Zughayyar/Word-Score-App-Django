@@ -5,6 +5,9 @@ This project is a Django-based web application that allows users to analyze the 
 
 This README provides an overview of how to handle real-world challenges, explains why the application is I/O bound, and outlines strategies for scaling the application in a distributed environment.
 
+Here's a screenshot of the app:
+
+![Word Score App Screenshot](repo_media/Screenshot.png)
 
 ## ⚙️ Tech Stack
 - **Backend:** Django, Celery
